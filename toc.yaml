@@ -1,0 +1,20 @@
+toc:
+  properties:
+    subcollection: pattern-agentic-platform
+    audience: solution
+    category: ai
+    content-type: white-paper
+    navigation: hidden
+    href: /docs/pattern-agentic-platform
+    path: pattern-agentic-platform
+    label: Agentic AI Workflow with Watson Orchestrate and MCP on IBM Cloud
+    description: Watson Orchestrate is an Agent hosting platform to build and deploy agents and to orchestrate the workflow communication between Agents and MCP tools.
+    authors:
+    - name: Pradeep Kadiyala
+      title: Senior Architect, Industry Solutions
+      url: https://www.linkedin.com/in/pradeepkadiyala1980/
+  entries:
+  - navgroup:
+      id: overview
+      topics:
+      - white-paper.md
