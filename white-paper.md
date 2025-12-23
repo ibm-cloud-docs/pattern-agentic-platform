@@ -51,7 +51,7 @@ Essentially, Watson Orchestrate is about empowering businesses with AI driven pr
 
 Watson Orchestrate is a Multi-Agent hosting platform to build and deploy agents and to orchestrate the workflow communication between Agents and MCP tools. The workflows provide technical safeguard with security and AI governance into consideration.
 
-![Multi-Agent Architecture with Watson Orchestrate](image/wxo-architecture-system-design.png){: caption="Multi-Agent Architecture with Watson Orchestrate" caption-side="bottom"}
+![Multi-Agent Architecture with Watson Orchestrate](images/wxo-architecture-system-design.png){: caption="Multi-Agent Architecture with Watson Orchestrate" caption-side="bottom"}
 
 The multi-agent orchestration with Watson Orchestrate architecture follows a layered, service-oriented approach, separating client interaction, core agent logic, and remote/infrastructure supporting services.
 
@@ -70,7 +70,7 @@ The architecture is logically divided into four main domains:
 
 The architecture consists of layers of components to run Generative AI Agentic Workflow solutions built with Watson Orchestrate and MCP services. Agents and MCP Services can be run locally in Watson Orchestrate or can be imported from remote MCP servers that run on containerized platforms. Knowledgebase of an agent in Watson Orchestrate can be integrated with databases that support vectorization like DataStax and PostgreSQL.
 
-![Running Generative AI Agentic Workflow solutions](image/watson-orchestrate-mcp-pattern.png){: caption="Running Generative AI Agentic Workflow solutions" caption-side="bottom"}
+![Running Generative AI Agentic Workflow solutions](images/watson-orchestrate-mcp-pattern.png){: caption="Running Generative AI Agentic Workflow solutions" caption-side="bottom"}
 
 The architecture comprises of:
 
@@ -95,7 +95,7 @@ Watson Orchestrate is integrated with LLMs hosted on environments such as
 
 The following heatmap highlights the cloud capabilities in scope for the multi-agent orchestration with Watson Orchestrate architecture following the IBM Cloud Architecture Design Framework.
 
-![Cloud Domains in Scope](image/wxo-heatmap.png){: caption="Cloud Domains in Scope" caption-side="bottom"}
+![Cloud Domains in Scope](images/wxo-heatmap.png){: caption="Cloud Domains in Scope" caption-side="bottom"}
 
 - **Application Platforms**: Mobile, Edge, Enterprise Applications
 - **Data**: Data Storage, Artificial Intelligence
