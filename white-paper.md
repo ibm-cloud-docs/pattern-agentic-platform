@@ -79,12 +79,12 @@ The architecture comprises of:
 **Watson Orchestrate Service**: Watson Orchestrate hosts Custom / Remote Agents or Agents in the Catalog and build Agentic Workflows. Agents comprises of Prompts that are predefined system prompts by the clients, Knowledgebase provided with domain knowledge for RAG pattern queries and Tools to prepare, analyze and perform actions.
 Tools comprises of client defined tools and tools hosted on MCP Servers. MCP Tools can be integrated with remote MCP servers that are hosted in IaaS, PaaS and SaaS using MCP Toolkit as well as you can host local MCP servers on Watson Orchestrate. Connections & Credentials are the components that securely store the configuration and necessary authorization details (tokens, API keys) required to call the various external services (MCP Servers, Application Service APIs).
 
-Watson Orchestrate is integrated with LLMs hosted on environments such as
+Watson Orchestrate is integrated with LLMs hosted on environments such as:
 -	watsonx.ai as a SaaS offering
 -	RedHat OpenShift AI hosted on VPC infrastructure with GPUs
 -	RHEL AI inferencing on VPC Infrastructure with GPUs
 
-**Agentic AI Application Platform**: Agents, MCP, Microservice API servers are hosted on containerized platforms like OpenShift, Kubernetes and Code Engine service that are build on programming languages (nodejs, python etc…) and frameworks (LangGraph, Crew AI, Bee AI etc…)
+**Agentic AI Application Platform**: Agents, MCP, Microservice API servers are hosted on containerized platforms like OpenShift, Kubernetes and Code Engine service that are build on programming languages (nodejs, python etc…) and frameworks (LangGraph, Crew AI, Bee AI etc…).
 
 **Model Inferencing Platform**: LLM models that are trained and fine-tuned are hosted on Red Hat OpenShift AI or VSI instance with GPU accelerated profiles like NVIDIA (H100, H200 etc..),  AMD (MI300x) and Intel (Gaudi 3). The models can be inferenced and integrated with Watson Orchestrate through cloud internet service.
 
@@ -158,8 +158,8 @@ The following table outlines the products or services used in the architecture f
 | | [Continuous Compliance (CC)](/docs/devsecops?topic=devsecops-tutorial-cc-toolchain) | A pipeline that continuously scans deployed artifacts and repositories |
 | | [Container Registry](/apidocs/container-registry) | Highly available, and scalable private image registry |
 | Resiliency | [VSI and Storage multiple zones in two regions](/docs/solution-tutorials?topic=solution-tutorials-vpc-multi-region) | Web, app, database high availability and disaster recovery |
-| Service Management | [Cloud Monitoring](/docs/monitoring?topic=monitoring-about-monitor) | Apps and operational monitoring |
-| | [Cloud Logs](/docs/cloud-logs?topic=cloud-logs-about-cl) | Operational and audi logs |
+| Service Management | [Cloud Monitoring](/docs/monitoring?topic=monitoring-about-monitor) | Applications and operational monitoring |
+| | [Cloud Logs](/docs/cloud-logs?topic=cloud-logs-about-cl) | Operational and audit logs |
 {: caption="Components in architecture" caption-side="bottom"}
 
 ### Compliance
@@ -167,10 +167,7 @@ The following table outlines the products or services used in the architecture f
 
 The Continuous Integration (CI), Continuous Deployment (CD), and Continuous Compliance (CC) pipelines, referred to as DevSecOps Application Lifecycle Management are used to deploy the application, check for vulnerabilities, and ensure auditability. Below are some of important compliance features of DevSecOps Application Lifecycle Management:
 
-   **Vulnerability Scans** involve using specialized tools to look for security vulnerabilities in the code. This is crucial to identify and fix potential security issues before they become a problem in production.
-
-   **Sign Build Artifacts** The code is compiled and built into software or application artifacts (like executable files or libraries). These artifacts are then digitally signed to ensure their authenticity and integrity.
-
-   **Evidence Gathering** This involves collecting and storing evidence of the development process, such as commit logs, build logs, and other relevant data. It helps in tracing back and understanding what happened at different stages of development.
-
-   **Evidence Locker** This involves collecting and storing evidence of the development process, such as commit logs, build logs, and other relevant data. This helps in tracing back and understanding what happened at different stages of development.
+   - **Vulnerability Scans** involve using specialized tools to look for security vulnerabilities in the code. This is crucial to identify and fix potential security issues before they become a problem in production.
+   - **Sign Build Artifacts** The code is compiled and built into software or application artifacts (like executable files or libraries). These artifacts are then digitally signed to ensure their authenticity and integrity.
+   - **Evidence Gathering** This involves collecting and storing evidence of the development process, such as commit logs, build logs, and other relevant data. It helps in tracing back and understanding what happened at different stages of development.
+   - **Evidence Locker** This involves collecting and storing evidence of the development process, such as commit logs, build logs, and other relevant data. This helps in tracing back and understanding what happened at different stages of development.
