@@ -35,7 +35,7 @@ Agents can be built with low code / no code and create workflow with internal an
 -	Integration with Enterprise tools: It connects with common business applications like enterprise databases (eg. {{site.data.keyword.lakehouse_full_notm}}, datastax), Salesforce, Workday etc.
 -	Agentic Behavior: It acts as intelligent agent that can reason, plan and execute tasks across multiple systems
 
-## Key Features of Watson Orchestrate
+## Key Features of {{site.data.keyword.wxorchestrate_full_notm}}
 {: #key-features}
 
 The key features of {{site.data.keyword.wxorchestrate_full_notm}} include:
@@ -150,8 +150,7 @@ The following table outlines the products or services used in the architecture f
 | | [BYO Bastion Host on VPC VSI](/docs/framework-financial-services?topic=framework-financial-services-vpc-architecture-connectivity-bastion-tutorial-teleport) | Remote access with Privileged Access Management |
 | | [{{site.data.keyword.appid_full_notm}}](/docs/appid?topic=appid-getting-started) | Add authentication to web and mobile apps |
 | | [{{site.data.keyword.secrets-manager_full_notm}}](/docs/secrets-manager?topic=secrets-manager-getting-started#getting-started) | Certificate and Secrets Management |
-| | [{{site.data.keyword.sysdigsecure_full_notm}}
-](/docs/security-compliance?topic=security-compliance-getting-started) | Implement controls for secure data and workload deployments, and assess security and compliance posture |
+| | [{{site.data.keyword.sysdigsecure_full_notm}}](/docs/security-compliance?topic=security-compliance-getting-started) | Implement controls for secure data and workload deployments, and assess security and compliance posture |
 | | [Hyper Protect Crypto Services](/docs/hs-crypto?topic=hs-crypto-get-started) | Hardware security mVodule (HSM) and Key Management Service |
 | | [Virtual Network Function](/docs/vpc?topic=vpc-deploy-vnf) | Virtualized network services running on virtual machines |
 | DevOps | [Continuous Integration (CI)](/docs/containers?topic=containers-cicd) | A pipeline that tests, scans and builds the deployable artifacts from the application repositories |
