@@ -2,7 +2,7 @@
 
 copyright:
   years: 2025
-lastupdated: "2025-12-24"
+lastupdated: "2025-12-26"
 
 keywords:
 
@@ -24,7 +24,7 @@ subcollection: pattern-agentic-platform
 ## Why {{site.data.keyword.wxorchestrate_full_notm}}?
 {: #why-orchestrate}
 
-Agents can be built with low code / no code and create workflow with internal and external agents as well as local and remote MCP tools. The workflows provide technical safeguard with security and AI governance into consideration.
+Agents can be built with low code / no code and and workflows can be created with internal and external agents as well as local and remote MCP tools. The workflows provide technical safeguards with security and AI governance in consideration.
 
 ## What It Does?
 {: #what-it-does}
@@ -51,7 +51,7 @@ Essentially, {{site.data.keyword.wxorchestrate_full_notm}} is about empowering b
 
 {{site.data.keyword.wxorchestrate_full_notm}} is a Multi-Agent hosting platform to build and deploy agents and to orchestrate the workflow communication between Agents and MCP tools. The workflows provide technical safeguard with security and AI governance into consideration.
 
-![Multi-Agent Architecture with {{site.data.keyword.wxorchestrate_full_notm}}](images/wxo-architecture-system-design.png){: caption="Multi-Agent Architecture with Watson Orchestrate" caption-side="bottom"}
+![Multi-Agent Architecture with {{site.data.keyword.wxorchestrate_full_notm}}](images/wxo-architecture-system-design.svg){: caption="Multi-Agent Architecture with Watson Orchestrate" caption-side="bottom"}
 
 The multi-agent orchestration with {{site.data.keyword.wxorchestrate_full_notm}} architecture follows a layered, service-oriented approach, separating client interaction, core agent logic, and remote/infrastructure supporting services.
 
@@ -70,7 +70,7 @@ The architecture is logically divided into four main domains:
 
 The architecture consists of layers of components to run Generative AI Agentic Workflow solutions built with {{site.data.keyword.wxorchestrate_full_notm}} and MCP services. Agents and MCP Services can be run locally in {{site.data.keyword.wxorchestrate_full_notm}} or can be imported from remote MCP servers that run on containerized platforms. Knowledgebase of an agent in Watson Orchestrate can be integrated with databases that support vectorization like DataStax and PostgreSQL.
 
-![Running Generative AI Agentic Workflow solutions](images/watson-orchestrate-mcp-pattern.png){: caption="Running Generative AI Agentic Workflow solutions" caption-side="bottom"}
+![Running Generative AI Agentic Workflow solutions](images/wxo-architecture.svg){: caption="Running Generative AI Agentic Workflow solutions" caption-side="bottom"}
 
 The architecture comprises of:
 
