@@ -16,51 +16,48 @@ subcollection: pattern-agentic-platform
 # Agentic AI Workflow with {{site.data.keyword.wxorchestrate_full_notm}} and MCP on IBM Cloud
 {: #agentic-ai-workflow}
 
-{{site.data.keyword.wxorchestrate_full_notm}} is an Agent hosting platform to build and deploy agents and to orchestrate the workflow communication between Agents and MCP tools.
-{: shortdesc}
+Agentic AI shifts automation from rigid, pre-programmed scripts to autonomous, goal-oriented systems. Unlike standard Generative AI, which primarily focuses on content creation, Agentic AI utilizes Large Language Models (LLMs) as reasoning engines to plan and execute complex tasks.
 
+In this workflow, an Orchestrator dynamically manages the process using a "Reason-Act-Observe" loop:
 
+**Reason**: The agent analyzes the user's intent and decomposes it into logical steps.
 
-## Why {{site.data.keyword.wxorchestrate_full_notm}}?
-{: #why-orchestrate}
+**Act**: It autonomously selects and triggers the necessary tools, APIs, or skills.
 
-Agents can be built with low code / no code and and workflows can be created with internal and external agents as well as local and remote MCP tools. The workflows provide technical safeguards with security and AI governance in consideration.
+**Observe**: It evaluates the results and adapts the plan if necessary.
 
-## What It Does?
-{: #what-it-does}
+This architecture allows enterprises to handle unstructured workflows such as IT incident remediation or customer service with minimal human intervention, ensuring scalable and adaptive productivity.
+
+## Introduction of {{site.data.keyword.wxorchestrate_full_notm}}
+{: #wxo-intro}
+
+{{site.data.keyword.wxorchestrate_full_notm}} is an Agent hosting platform to build and deploy agents and to orchestrate the workflow communication. Agents can be built with low code / no code and workflows can be created with internal and external agents as well as native and remote tools. The workflows provide technical safeguards with security and AI governance in consideration. {: shortdesc}
 
 {{site.data.keyword.wxorchestrate_full_notm}} delivers multiple capabilities including:
--	Task Automation: It can handle repetitive tasks like scheduling a meeting, updating CRM records, generating reports, initiating workflows
+-	**Task Automation:** It can handle repetitive tasks like scheduling a meeting, updating CRM records, generating reports, initiating workflows
 -	Natural Language Interaction: Users interact with it through simple natural language commands (e.g “Perform risk analysis of the high value trade finance cases”)
--	Integration with Enterprise tools: It connects with common business applications like enterprise databases (eg. {{site.data.keyword.lakehouse_full_notm}}, datastax), Salesforce, Workday etc.
--	Agentic Behavior: It acts as intelligent agent that can reason, plan and execute tasks across multiple systems
-
-## Key Features of {{site.data.keyword.wxorchestrate_full_notm}}
-{: #key-features}
-
-The key features of {{site.data.keyword.wxorchestrate_full_notm}} include:
--	Pre-built skills: Ready to use capabilities for HR, sales, operations etc.
--	Customizable workflow: Design workflows tailored to a given domain or organization
--	Choosing LLMs:  Assign LLMs to agents according to their functions such as image processing or prompt optimization etc.
--	Secure and Scalable: Built on IBM Cloud with enterprise grade security
+-	**Integration with Enterprise tools:** It connects with common business applications like enterprise databases (eg. {{site.data.keyword.lakehouse_full_notm}}, datastax), Salesforce, Workday etc.
+-	**Agentic Behavior:** It acts as intelligent agent that can reason, plan and execute tasks across multiple systems
 
 Essentially, {{site.data.keyword.wxorchestrate_full_notm}} is about empowering businesses with AI driven productivity by reducing manual work and focus on high value tasks.
 
-## Architecture
-{: #architecture}
-
-{{site.data.keyword.wxorchestrate_full_notm}} is a Multi-Agent hosting platform to build and deploy agents and to orchestrate the workflow communication between Agents and MCP tools. The workflows provide technical safeguard with security and AI governance into consideration.
+The multi-agent orchestration with {{site.data.keyword.wxorchestrate_full_notm}} architecture shown in the figure follows a layered, service-oriented approach, separating client interaction, core agent logic, and remote/infrastructure supporting services.
 
 ![Multi-Agent Architecture with {{site.data.keyword.wxorchestrate_full_notm}}](images/wxo-architecture-system-design.svg){: caption="Multi-Agent Architecture with Watson Orchestrate" caption-side="bottom"}{: external download="images/wxo-architecture-system-design.svg"}
 
-The multi-agent orchestration with {{site.data.keyword.wxorchestrate_full_notm}} architecture follows a layered, service-oriented approach, separating client interaction, core agent logic, and remote/infrastructure supporting services.
 
 The architecture is logically divided into four main domains:
 
    - **Client Applications**: The boundary for user interaction and service consumption. This layer manages the initial user request and ensures secure access to the system. The user initiating the interaction via a User Request. The user interface (e.g., a web portal, mobile app, or API gateway) receives the User Request and forwards the request (as a User Prompt) to the Agent Workflows layer. Authentication service will authenticate the user before sending the request to the Agent workflows.
-   - **Agent Workflows ({{site.data.keyword.wxorchestrate_full_notm}})**: The core intelligence layer responsible for interpreting user intent and coordinating actions across internal and external services. Agent workflows are defined using {{site.data.keyword.wxorchestrate_full_notm}} to interpret the user intent, breakdown complex tasks into steps and decide which tools and models to invoke. {{site.data.keyword.wxorchestrate_full_notm}} supports Prompts that define the instructions, context, and constraints given to the Agents. Knowledgebase manages structured and unstructured information used by the Agents for LLM responses using RAG. Knowledgebase can use a local vector store in {{site.data.keyword.wxorchestrate_full_notm}} or it can integrate with an external Vector Store.
+   - **Agent Workflows ({{site.data.keyword.wxorchestrate_full_notm}})**: The core intelligence layer responsible for interpreting user intent and coordinating actions across internal and external services. Agent workflows are defined using {{site.data.keyword.wxorchestrate_full_notm}} to interpret the user intent, breakdown complex tasks into steps and decide which tools and models to invoke. {{site.data.keyword.wxorchestrate_full_notm}} supports Prompts that define the instructions, context, and constraints given to the Agents. Knowledgebase manages structured and unstructured information used by the Agents for LLM responses using RAG. Knowledgebase can use a local vector store in {{site.data.keyword.wxorchestrate_full_notm}} or it can integrate with an external Vector Store. The Tools component is central to the architecture's ability to move beyond simple question-answering to performing real-world actions and retrieving live data. This layer is designed for interoperability, supporting three primary integration patterns:
 
-   The MCP Tools component in the diagram is central to the architecture's ability to move beyond simple question-answering and perform real-world actions and retrieve current, accurate data. These are the actual implemented functions or API connectors that perform specific tasks.
+      - **Standard Tools:** Direct implementations of functions or API connectors.
+
+      - **MCP Stdio Servers:** Tools integrated via the Model Context Protocol running over standard input/output for local or containerized processes.
+
+      - **MCP Remote Servers:** Tools accessed via the Model Context Protocol over network transports (such as SSE) for distributed capabilities.
+
+      Together, these interfaces enable the agent to execute specific tasks and access distinct data sources across diverse environments.
 
    - **IaaS, PaaS, SaaS Services (Application/Data Plane)**: The layer hosting the external MCP servers, external applications, LLM models, and enterprise data required to execute the agent's tasks. This layer provides the computational power and external application functionality needed for task execution. LLMs can be hosted and inferenced as SaaS for multi-tenant or on a PaaS / IaaS (RedHat OpenShift AI, RHEL AI etc…) for single tenant solutions. MCP Servers that provide a list of domain specific tools like (Salesforce, HR, Trade Finance etc…) are hosted on PaaS such as ({{site.data.keyword.codeenginefull_notm}}, ROKS etc…) to perform domain specific tasks. Server applications with integration to backend systems and data stores that host the business logic and data, utilized by both the LLM and the external MCP Servers through APIs.
    - **Cloud Services (Control Plane/Infrastructure)**: The foundational services for security, observability, and management. A secure vault secrets manager stores sensitive information like API keys and credentials is provisioned to ensure secure key stores. The central authority for authentication, authorization, and managing user identities and service accounts across the entire platform are done using IAM services while the monitoring and logging are provisioned to provide observability across the layers.
@@ -76,13 +73,28 @@ The architecture comprises of:
 
 **Client Application Platform**: Client Front end applications hosted on serverless {{site.data.keyword.codeenginefull_notm}} and Backend services supporting the client application hosted on containerized platform like Kubernetes will access Agents hosted on {{site.data.keyword.wxorchestrate_full_notm}} through embedded Java Scripts or through {{site.data.keyword.wxorchestrate_full_notm}} APIs.
 
-**{{site.data.keyword.wxorchestrate_full_notm}} Service**: {{site.data.keyword.wxorchestrate_full_notm}} hosts Custom / Remote Agents or Agents in the Catalog and build Agentic Workflows. Agents comprises of Prompts that are predefined system prompts by the clients, Knowledgebase provided with domain knowledge for RAG pattern queries and Tools to prepare, analyze and perform actions.
-Tools comprises of client defined tools and tools hosted on MCP Servers. MCP Tools can be integrated with remote MCP servers that are hosted in IaaS, PaaS and SaaS using MCP Toolkit as well as you can host local MCP servers on {{site.data.keyword.wxorchestrate_full_notm}}. Connections & Credentials are the components that securely store the configuration and necessary authorization details (tokens, API keys) required to call the various external services (MCP Servers, Application Service APIs).
+**{{site.data.keyword.wxorchestrate_full_notm}} Service**: {{site.data.keyword.wxorchestrate_full_notm}} serves as the foundational control plane for enterprise Agentic AI.The platform allows enterprises to deploy autonomous workflows that are secure, scalable, and grounded in business data. The platform's capabilities are organized into three primary pillars
 
-{{site.data.keyword.wxorchestrate_full_notm}} is integrated with LLMs hosted on environments such as:
--	IBM watsonx.ai as a SaaS offering
--	Red Hat OpenShift AI hosted on {{site.data.keyword.vpc_short}} infrastructure with GPUs
--	RHEL AI inferencing on {{site.data.keyword.vpc_short}} Infrastructure with GPUs
+   - **Core Agentic Capabilities**: These features define the "brain" of the system, determining how agents perceive tasks, plan actions, and retrieve information.
+      - [Agents](https://developer.watson-orchestrate.ibm.com/agents/overview){: external} - the autonomous units of the platform. You can build Custom Agents, integrate specialized Remote Agents, or deploy pre-configured Catalog Agents. Unlike standard bots, these agents utilize reasoning loops to decompose complex user goals into manageable sub-tasks.
+      - [Agentic Workflows](https://developer.watson-orchestrate.ibm.com/tools/flows/overview){: external} The operational backbone that defines multi-step logic. Workflows allow agents to maintain context over long interactions, manage state, and execute sequential processes that require conditional decision-making.
+      - [Prompts](https://developer.watson-orchestrate.ibm.com/agents/descriptions){: external} The governance layer for agent behavior. These system instructions (or "System Prompts") define the agent's persona, operational boundaries, and formatting rules, ensuring that autonomous actions remain aligned with business guidelines.
+      - [Knowledge Base](https://developer.watson-orchestrate.ibm.com/knowledge_base/build_kb){: external} (RAG) The long-term memory of the system. By implementing Retrieval-Augmented Generation (RAG), agents can access, search, and cite domain-specific documents (PDFs, policies, manuals) to provide accurate, evidence-based responses.
+   - **Tools & Integration Framework**: This feature enables to bridge the gap between AI reasoning and real-world execution.
+      - [Tools](https://developer.watson-orchestrate.ibm.com/tools/overview){: external} The executable skills available to an agent. These range from simple Python scripts and data analysis functions to complex API connectors that allow agents to read from databases or write to enterprise software systems.
+      - [MCP Integration](https://developer.watson-orchestrate.ibm.com/mcp_server/wxOmcp_integration){: external} A standardized protocol for limitless extensibility. The platform supports the Model Context Protocol (MCP) in two modes:
+
+         - *Local MCP Servers*: Hosted directly within {{site.data.keyword.wxorchestrate_full_notm}} for tightly coupled integrations.
+
+         - *Remote MCP Servers*: Secure connections to tools distributed across external IaaS, PaaS, or SaaS environments via the MCP Toolkit.
+      - [Connections & Credentials](https://developer.watson-orchestrate.ibm.com/connections/overview){: external} The security vault for autonomous action. This component manages the authentication lifecycle, securely storing API keys, OAuth tokens, and secrets to ensure that every tool call is authorized and auditable.
+   - **LLM Infrastructure Support**: To ensure flexibility and cost-efficiency, the platform decouples the orchestration layer from the inference layer.
+
+      [LLM Integration](https://developer.watson-orchestrate.ibm.com/llm/getting_started_llm){: external} Enterprise-grade model support that adapts to your infrastructure needs:
+
+      - IBM watsonx.ai: Managed SaaS inference for rapid deployment and scaling.
+      - Red Hat OpenShift AI (RHOAI): Self-managed inference on {{site.data.keyword.vpc_short}} infrastructure, offering data sovereignty and GPU acceleration.
+      - RHEL AI: Optimized, lightweight inference on Red Hat Enterprise Linux for edge or specific hardware configurations.
 
 **Agentic AI Application Platform**: Agents, MCP, Microservice API servers are hosted on containerized platforms like Red Hat OpenShift, Kubernetes, and {{site.data.keyword.codeenginefull_notm}} service that are build on programming languages (nodejs, python etc…) and frameworks (LangGraph, Crew AI, Bee AI etc…).
 
@@ -130,10 +142,10 @@ The following table outlines the products or services used in the architecture f
 
 | **Aspect** | **Architecture \n components** | **How the component is used** |
 | -------------------- | ------------------------ | -------------------------------------------------------------------------- |
-| Data | [{{site.data.keyword.wxorchestrate_full_notm}}](https://www.ibm.com/products/watsonx-orchestrate) | Orchestrate AI agents, assistants and workflows across your business |
-| | [IBM watsonx.ai](https://www.ibm.com/products/watsonx-ai) | Brings together new generative AI capabilities powered by foundation models and traditional machine learning (ML) into a powerful studio spanning the AI lifecycle |
-| | [{{site.data.keyword.lakehouse_full_notm}} with Milvus](https://www.ibm.com/products/watsonx-data) | Enables data analytics for AI at scale and provides Milvus database to store vector embeddings for RAG patterns |
-| | [IBM watsonx.governance](https://www.ibm.com/products/watsonx-governance) | Direct, manage and monitor the artificial intelligence activities |
+| Data | [{{site.data.keyword.wxorchestrate_full_notm}}](https://www.ibm.com/products/watsonx-orchestrate){: external} | Orchestrate AI agents, assistants and workflows across your business |
+| | [IBM watsonx.ai](https://www.ibm.com/products/watsonx-ai){: external} | Brings together new generative AI capabilities powered by foundation models and traditional machine learning (ML) into a powerful studio spanning the AI lifecycle |
+| | [{{site.data.keyword.lakehouse_full_notm}} with Milvus](https://www.ibm.com/products/watsonx-data){: external} | Enables data analytics for AI at scale and provides Milvus database to store vector embeddings for RAG patterns |
+| | [IBM watsonx.governance](https://www.ibm.com/products/watsonx-governance){: external} | Direct, manage and monitor the artificial intelligence activities |
 | Compute | [Virtual Servers for {{site.data.keyword.vpc_short}}](/docs/vpc?topic=vpc-about-advanced-virtual-servers&interface=ui) | Web, App, LLMs with GPU Accelerated VSI instances and database servers |
 | | [{{site.data.keyword.codeenginefull_notm}}](/docs/codeengine?topic=codeengine-about) | Abstracts the operational burden of building, deploying, and managing workloads in Kubernetes so that developers can focus on what matters most to them: the source code |
 | | [{{site.data.keyword.openshiftlong_notm}}](/docs/openshift?topic=openshift-getting-started) | A managed offering to create your own cluster of compute hosts where you can deploy and manage containerized apps on IBM Cloud |
