@@ -16,17 +16,42 @@ subcollection: pattern-agentic-platform
 # Agentic AI Workflow with {{site.data.keyword.wxorchestrate_full_notm}} and MCP on IBM Cloud
 {: #agentic-ai-workflow}
 
-Agentic AI shifts automation from rigid, pre-programmed scripts to autonomous, goal-oriented systems. Unlike standard Generative AI, which primarily focuses on content creation, Agentic AI utilizes Large Language Models (LLMs) as reasoning engines to plan and execute complex tasks.
+Agentic AI is an artificial intelligence system that can accomplish a specific goal with limited supervision. It consists of AI agents—machine learning models that mimic human decision-making to solve problems in real time. AI Agent is an autonomous software entity capable of understanding, planning, and executing complex tasks with minimal human intervention. Unlike traditional AI, which is often reactive or limited to content generation, an agent possesses the capacity to act purposefully to reach a goal by designing its own workflow and interacting with external environments.
 
-In this workflow, an Orchestrator dynamically manages the process using a "Reason-Act-Observe" loop:
+The critical components that distinguish an agent from a simple chatbot:
 
-**Reason**: The agent analyzes the user's intent and decomposes it into logical steps.
+- **Perception:** Gathering data from the environment via APIs, or user interactions.
 
-**Act**: It autonomously selects and triggers the necessary tools, APIs, or skills.
+- **Reasoning:** Using LLMs (like Granite) to analyze perceived data, decompose complex goals into subtasks, and select the best course of action.
 
-**Observe**: It evaluates the results and adapts the plan if necessary.
+- **Goal setting:** Sets objectives based on predefined goals or user inputs and then develops a strategy to achieve these goals, often by using decision trees, reinforcement learning or other planning algorithms.
+
+- **Decision-making** Evaluates multiple possible actions and chooses the optimal one based on factors such as efficiency, accuracy and predicted outcomes. It might use probabilistic models, utility functions or machine learning-based reasoning to determine the best course of action.
+
+- **Execution** Executes action, either by interacting with external systems (APIs, data, robots) or providing responses to users.
+
+- **Learning/Reflection:** Evaluating outcomes and adjusting future plans based on feedback or results.
+
+
+![Agent AI Workflow Components](images/agentic-intro.svg){: caption="Agent Workflow" caption-side="bottom"}{: external download="images/wxo-architecture-system-design.svg"}
+
 
 This architecture allows enterprises to handle unstructured workflows such as IT incident remediation or customer service with minimal human intervention, ensuring scalable and adaptive productivity.
+
+## The Role of Model Context Protocol (MCP)
+{: #role-mcp}
+
+The Model Context Protocol (MCP) is a standardized open-source communication protocol that IBM has integrated into its agent architecture (such as watsonx Orchestrate) to solve the connector problem. MCP provides a standardized integration layer, allowing agents to connect to any external service (databases, local files, enterprise APIs) without rewriting code for each individual connection.
+
+In a business environment, giving an agent full access to tools is risky. MCP plays a critical role in IBM's architecture by:
+
+- **Observability:** Providing visibility into which tools an agent uses and how it uses them.
+
+- **Security & Permissions:** Allowing for granular control and audit trails over tool execution, ensuring agents only perform authorized operations.
+
+- **Reusability:** Tools built with MCP can be reused across different agent frameworks (like LangChain, LangGraph, or BeeAI) within an organization.
+
+
 
 ## Introduction of {{site.data.keyword.wxorchestrate_full_notm}}
 {: #wxo-intro}
@@ -64,6 +89,31 @@ The architecture is logically divided into four main domains:
 
 ## Architecture Pattern
 {: #arch-pattern}
+
+The following architecture patterns describe the standards used in the Agentic AI workflow industry solutions
+
+### Agentic AI workflow with Independent Software Vendors (ISVs) hosted on IBM Cloud
+{: #agentic-workflow-isv}
+
+{{site.data.keyword.wxorchestrate_full_notm}} support native (built on {{site.data.keyword.wxorchestrate_full_notm}}) as well as external agents (those running on any stack outside {{site.data.keyword.wxorchestrate_full_notm}}). {{site.data.keyword.wxorchestrate_full_notm}} Agent catalog comes with a wide range of predefined agents that include domain specific independent software vendors like SAP, Workday, Salesforce etc. that are hosted as services on IBM Cloud Infrastructure.
+
+![Running Generative AI Agentic Workflow solutions](images/ai-isv-catalog.svg){: caption="Running Generative AI Agentic Workflow solutions" caption-side="bottom"}{: external download="images/wxo-architecture.svg"}
+
+The Agentic AI workflow can utilize the existing ISV/external agents and tools to build a complete end to end client solutions. The architecture facilitates seamless, secure interaction between {{site.data.keyword.wxorchestrate_full_notm}} and your core enterprise applications.
+
+**The Integration Bridge:** The Agent Catalog within {{site.data.keyword.wxorchestrate_full_notm}} acts as the direct conduit to external enterprise services.
+
+**Supported Enterprise ISVs:** The catalog connects natively to major software vendors hosted on IBM Cloud, such as SAP, Workday, Salesforce etc.
+
+**Secure Execution:** Because this workflow operates within the IBM Cloud Services ecosystem, all data exchanges between AI agents and these ISVs are protected by embedded Security Services that are Financial Service Validated(e.g., IBM Verify, Key Protect) and tracked via centralized Observability (e.g., Auditing, Logging).
+
+
+This makes the integration of services hosted on IBM Cloud with Agents to be seamless and build with low-code/no-code solution as well as leveraging existing task performing services with minimal or no changes.
+
+*Note: To onboard Agents to {{site.data.keyword.wxorchestrate_full_notm}} catalog follow the documentation - [IBM Agent Connect](https://connect.watson-orchestrate.ibm.com/introduction)*
+
+### Agentic AI workflow for an enterprise solution on IBM Cloud
+{: #agentic-workflow-ent-sol}
 
 The architecture consists of layers of components to run Generative AI Agentic Workflow solutions built with {{site.data.keyword.wxorchestrate_full_notm}} and MCP services. Agents and MCP Services can be run locally in {{site.data.keyword.wxorchestrate_full_notm}} or can be imported from remote MCP servers that run on containerized platforms. Knowledgebase of an agent in Watson Orchestrate can be integrated with databases that support vectorization like DataStax and PostgreSQL.
 
