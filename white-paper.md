@@ -52,19 +52,7 @@ In a business environment, giving an agent full access to tools is risky. MCP pl
 - **Reusability:** Tools built with MCP can be reused across different agent frameworks (like LangChain, LangGraph, or BeeAI) within an organization.
 
 
-
-## Introduction of {{site.data.keyword.wxorchestrate_full_notm}}
-{: #wxo-intro}
-
-{{site.data.keyword.wxorchestrate_full_notm}} is an Agent hosting platform to build and deploy agents and to orchestrate the workflow communication. Agents can be built with low code / no code and workflows can be created with internal and external agents as well as native and remote tools. The workflows provide technical safeguards with security and AI governance in consideration. {: shortdesc}
-
-{{site.data.keyword.wxorchestrate_full_notm}} delivers multiple capabilities including:
--	**Task Automation:** It can handle repetitive tasks like scheduling a meeting, updating CRM records, generating reports, initiating workflows
--	Natural Language Interaction: Users interact with it through simple natural language commands (e.g “Perform risk analysis of the high value trade finance cases”)
--	**Integration with Enterprise tools:** It connects with common business applications like enterprise databases (eg. {{site.data.keyword.lakehouse_full_notm}}, datastax), Salesforce, Workday etc.
--	**Agentic Behavior:** It acts as intelligent agent that can reason, plan and execute tasks across multiple systems
-
-Essentially, {{site.data.keyword.wxorchestrate_full_notm}} is about empowering businesses with AI driven productivity by reducing manual work and focus on high value tasks.
+## Introduction
 
 The multi-agent orchestration with {{site.data.keyword.wxorchestrate_full_notm}} architecture shown in the figure follows a layered, service-oriented approach, separating client interaction, core agent logic, and remote/infrastructure supporting services.
 
@@ -86,6 +74,8 @@ The architecture is logically divided into four main domains:
 
    - **IaaS, PaaS, SaaS Services (Application/Data Plane)**: The layer hosting the external MCP servers, external applications, LLM models, and enterprise data required to execute the agent's tasks. This layer provides the computational power and external application functionality needed for task execution. LLMs can be hosted and inferenced as SaaS for multi-tenant or on a PaaS / IaaS (RedHat OpenShift AI, RHEL AI etc…) for single tenant solutions. MCP Servers that provide a list of domain specific tools like (Salesforce, HR, Trade Finance etc…) are hosted on PaaS such as ({{site.data.keyword.codeenginefull_notm}}, ROKS etc…) to perform domain specific tasks. Server applications with integration to backend systems and data stores that host the business logic and data, utilized by both the LLM and the external MCP Servers through APIs.
    - **Cloud Services (Control Plane/Infrastructure)**: The foundational services for security, observability, and management. A secure vault secrets manager stores sensitive information like API keys and credentials is provisioned to ensure secure key stores. The central authority for authentication, authorization, and managing user identities and service accounts across the entire platform are done using IAM services while the monitoring and logging are provisioned to provide observability across the layers.
+
+   - **Network:** [IBM Cloud Satellite](https://cloud.ibm.com/docs/satellite?topic=satellite-link-location-cloud) and [Direct Link](https://cloud.ibm.com/docs/dl?topic=dl-get-started-with-ibm-cloud-dl) extends the access to existing enterprise Agents, MCP and APIs providing network security and secure access.
 
 ## Architecture Pattern
 {: #arch-pattern}
@@ -151,6 +141,8 @@ The architecture comprises of:
 **Model Inferencing Platform**: LLM models that are trained and fine-tuned are hosted on Red Hat OpenShift AI or VSI instance with GPU accelerated profiles like NVIDIA (H100, H200 etc..),  AMD (MI300x) and Intel (Gaudi 3). The models can be inferenced and integrated with Watson Orchestrate through cloud internet service.
 
 **Management and Administration**: The Management VPC provides compute, storage, and network services like VPN to enable the consumer's or service provider's administrators to monitor, operate, and maintain the deployed Gen AI Platform services and applications on {{site.data.keyword.vpc_short}} infrastructure.
+
+**Enterprise Network Connctivity**: IBM Cloud VPC establishes private enterprise connectivity from customer data centers to IBM Cloud for access to applications, data, and services seamlessly through [IBM Cloud Direct Link](https://cloud.ibm.com/docs/dl?topic=dl-get-started-with-ibm-cloud-dl). This dedicated pathway links your on-premises virtual machines (VMs) and cloud environments, while [IBM Cloud Satellite Link](https://cloud.ibm.com/docs/satellite) creates a secure tunnel for private administrative and management connectivity to your distributed Red Hat OpenShift clusters. Together, these hybrid networking solutions provide network isolation with the ability to separate applications based on attributes such as data classification, public versus private traffic flows, and internal application function.
 
 ## Cloud Capabilities supporting architecture
 {: #cloud-capabilities}
