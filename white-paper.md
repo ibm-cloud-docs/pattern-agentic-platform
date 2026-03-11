@@ -53,6 +53,7 @@ In a business environment, giving an agent full access to tools is risky. MCP pl
 
 
 ## Introduction
+{: #intro}
 
 The multi-agent orchestration with {{site.data.keyword.wxorchestrate_full_notm}} architecture shown in the figure follows a layered, service-oriented approach, separating client interaction, core agent logic, and remote/infrastructure supporting services.
 
